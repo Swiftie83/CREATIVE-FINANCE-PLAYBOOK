@@ -1,0 +1,1084 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ALD Creative Finance Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&display=swap">
+<style>
+:root {
+  --bg: #f4f6f8;
+  --surf: #ffffff;
+  --surf-alt: #f8fafc;
+  --ink: #0f172a;
+  --mute: #475569;
+  --line: #e2e8f0;
+  
+  --navy: #0f2338;
+  --navy-light: #1e3a5f;
+  --brand: #1e3a5f;
+  --brand-ink: #ffffff;
+  
+  --gold: #d97706;
+  --gold-bg: #fffbeb;
+  --gold-line: #fcd34d;
+  
+  --ok: #16a34a;
+  --ok-bg: #f0fdf4;
+  
+  --warn: #dc2626;
+  --warn-bg: #fef2f2;
+  --warn-line: #fca5a5;
+  
+  --radius: 12px;
+  --shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  color-scheme: light;
+  box-sizing: border-box;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0b131e;
+    --surf: #132030;
+    --surf-alt: #1a2b3f;
+    --ink: #f1f5f9;
+    --mute: #94a3b8;
+    --line: #24364e;
+    
+    --navy: #091320;
+    --navy-light: #192c42;
+    --brand: #38bdf8;
+    --brand-ink: #0f172a;
+    
+    --gold: #f59e0b;
+    --gold-bg: #271e0c;
+    --gold-line: #78350f;
+    
+    --ok: #4ade80;
+    --ok-bg: #0c2918;
+    
+    --warn: #f87171;
+    --warn-bg: #2d1517;
+    --warn-line: #7f1d1d;
+    
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0b131e;
+  --surf: #132030;
+  --surf-alt: #1a2b3f;
+  --ink: #f1f5f9;
+  --mute: #94a3b8;
+  --line: #24364e;
+  --navy: #091320;
+  --navy-light: #192c42;
+  --brand: #38bdf8;
+  --brand-ink: #0f172a;
+  --gold: #f59e0b;
+  --gold-bg: #271e0c;
+  --gold-line: #78350f;
+  --ok: #4ade80;
+  --ok-bg: #0c2918;
+  --warn: #f87171;
+  --warn-bg: #2d1517;
+  --warn-line: #7f1d1d;
+  --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: inherit; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 15px/1.6 "Instrument Sans", system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar Navigation */
+nav {
+  background: var(--navy);
+  border-right: 1px solid var(--line);
+  padding: 24px 16px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.brand-header {
+  margin-bottom: 24px;
+  padding: 0 8px;
+}
+
+.brand-header h1 {
+  font: 700 22px/1.2 "Fraunces", Georgia, serif;
+  margin: 0 0 4px;
+  color: #f1d9a6;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand-header p {
+  margin: 0;
+  color: #9fb4c4;
+  font-size: 13px;
+}
+
+nav .grp {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin: 18px 8px 6px;
+}
+
+nav button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: none;
+  color: #cbd5e1;
+  font: inherit;
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  gap: 12px;
+}
+
+nav button:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+nav button[aria-current="true"] {
+  background: var(--gold);
+  color: #000;
+  font-weight: 600;
+}
+
+.pct {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  color: currentColor;
+}
+
+/* Main Area */
+main {
+  padding: 40px clamp(20px, 5vw, 64px) 80px;
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  margin-bottom: 32px;
+  min-height: 220px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--navy);
+  box-shadow: var(--shadow);
+}
+
+.hero svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 19, 32, 0.95) 0%, rgba(9, 19, 32, 0.6) 60%, rgba(9, 19, 32, 0.1) 100%);
+}
+
+.txt {
+  position: relative;
+  padding: 80px 28px 24px;
+  z-index: 2;
+}
+
+.hero h2 {
+  font: 700 32px/1.2 "Fraunces", Georgia, serif;
+  color: #ffffff;
+  margin: 0 0 8px;
+}
+
+.hero .lead {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 16px;
+  max-width: 65ch;
+}
+
+h3 {
+  font: 600 18px/1.3 "Fraunces", Georgia, serif;
+  margin: 32px 0 12px;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* UI Cards & Elements */
+.card {
+  background: var(--surf);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin: 16px 0;
+  box-shadow: var(--shadow);
+}
+
+.script {
+  border-left: 4px solid var(--brand);
+  background: var(--surf-alt);
+  border: 1px solid var(--line);
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 16px 0;
+  position: relative;
+}
+
+.script .t {
+  font-weight: 700;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--brand);
+  margin-bottom: 8px;
+}
+
+.script p {
+  margin: 0 0 8px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.script p:last-of-type { margin-bottom: 0; }
+
+.copy {
+  position: absolute;
+  right: 14px;
+  top: 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  color: var(--ink);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy:hover {
+  background: var(--line);
+}
+
+.note {
+  background: var(--gold-bg);
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 16px 0;
+  color: var(--ink);
+  font-size: 14.5px;
+}
+
+.note.risk {
+  background: var(--warn-bg);
+  border-left-color: var(--warn);
+}
+
+/* Checklists */
+.chk {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chk li { margin: 0; }
+
+.chk label {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 10px 6px;
+  cursor: pointer;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.15s;
+}
+
+.chk label:hover {
+  background: rgba(0, 0, 0, 0.015);
+}
+
+.chk li:last-child label { border-bottom: 0; }
+
+.chk input {
+  margin-top: 3px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--brand);
+  flex: none;
+  cursor: pointer;
+}
+
+.chk input:checked + span {
+  color: var(--mute);
+  text-decoration: line-through;
+}
+
+/* Strategy Picker & Buttons */
+.opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.opts button, .btn {
+  font: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  color: var(--ink);
+  border-radius: 30px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.opts button:hover, .btn:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+}
+
+.opts button[aria-pressed="true"] {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+.out {
+  min-height: 80px;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--gold-bg);
+  color: var(--gold);
+  border: 1px solid var(--gold-line);
+  margin-bottom: 8px;
+}
+
+/* Tables */
+.table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  margin: 16px 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 14px;
+  background: var(--surf);
+}
+
+th {
+  background: var(--navy);
+  color: #fff;
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 600;
+}
+
+td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+tr:last-child td { border-bottom: 0; }
+
+/* Calculator */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 14px;
+}
+
+label.f {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mute);
+}
+
+label.f input {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  font: inherit;
+  font-size: 15px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  transition: border 0.15s;
+}
+
+label.f input:focus {
+  border-color: var(--brand);
+  outline: none;
+}
+
+.res {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.res div {
+  background: var(--surf-alt);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+
+.res b {
+  display: block;
+  font-size: 20px;
+  color: var(--brand);
+}
+
+.res span {
+  font-size: 12px;
+  color: var(--mute);
+}
+
+/* Bottom Nav */
+.pn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  gap: 12px;
+}
+
+.pn button {
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid var(--line);
+  background: var(--surf);
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 10px 18px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.pn button:hover {
+  background: var(--bg);
+  border-color: var(--mute);
+}
+
+/* Responsive Mobile Bar */
+.mobile-header {
+  display: none;
+  background: var(--navy);
+  color: #fff;
+  padding: 12px 16px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mobile-header h1 {
+  font: 700 18px "Fraunces", Georgia, serif;
+  margin: 0;
+  color: #f1d9a6;
+}
+
+.menu-toggle {
+  background: rgba(255,255,255,0.1);
+  border: 0;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .app { display: block; }
+  .mobile-header { display: flex; }
+  
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease-in-out;
+    box-shadow: 4px 0 25px rgba(0,0,0,0.3);
+  }
+  
+  nav.open {
+    transform: translateX(0);
+  }
+  
+  main {
+    padding-top: 24px;
+  }
+  
+  .hero h2 { font-size: 24px; }
+}
+
+@media print {
+  nav, .pn, .copy, .mobile-header { display: none !important; }
+  .app { display: block; }
+  main { max-width: 100%; padding: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="mobile-header">
+  <h1>ALD Playbook</h1>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">Menu</button>
+</div>
+
+<div class="app">
+  <nav id="nav" aria-label="Playbook sections"></nav>
+  <main id="main" tabindex="-1"></main>
+</div>
+
+<script>
+var S = [];
+function add(id, g, t, lead, blocks) { S.push({ id: id, g: g, t: t, lead: lead, b: blocks }); }
+
+add("start", "Start here", "Overview", "Creative finance gives ALD more ways to buy when a plain cash offer doesn’t fit the seller. Work the call in this order.", [
+  { k: "note", x: "Golden rule: discover first, structure second, present the offer last. Never introduce a financing strategy before you understand the seller’s financial situation." },
+  { k: "h", x: "The four strategies" },
+  { k: "table", h: ["Strategy", "What it is"], r: [
+    ["Subject-To (Sub2)", "Buy the property subject to the seller’s existing mortgage. The loan stays in the seller’s name; ALD makes the payments."],
+    ["Owner financing", "The seller finances some or all of the price and receives a down payment plus monthly payments."],
+    ["Hybrid", "Money upfront, with the rest through seller financing or another agreed structure."],
+    ["Cash purchase", "Buy outright when the seller’s situation and the numbers support it."]
+  ]},
+  { k: "h", x: "Your call flow" },
+  { k: "table", h: ["Stage", "Where"], r: [
+    ["1. Motivation", "Discovery"],
+    ["2. Money picture", "Property finances"],
+    ["3. Pick a structure", "Strategy picker, then Subject-To, Owner financing or Hybrid"],
+    ["4. Find their ideal terms", "Negotiate and close"],
+    ["5. Protect everyone", "Legal and due diligence"],
+    ["6. Submit for approval", "Approval package"]
+  ]},
+  { k: "note", x: "Our job is not to convince every seller to accept creative financing. It is to understand their situation, find a workable solution, and protect both parties." }
+]);
+
+add("discovery", "Call flow", "1. Discovery", "Find the seller’s actual problem before you talk about any solution.", [
+  { k: "h", x: "Motivation questions" },
+  { k: "chk", id: "disc", i: [
+    "What has you considering selling the property?",
+    "How long have you owned it?",
+    "Is it occupied or vacant?",
+    "Are you living there, renting it, or managing it from out of town?",
+    "What would you ideally like to accomplish by selling?",
+    "Is your biggest priority cash upfront, ending the management burden, or monthly income?",
+    "How soon would you like this resolved?",
+    "Have you considered alternatives to a traditional cash sale?"
+  ]},
+  { k: "note", x: "Never assume the mortgage balance equals the seller’s equity or the property’s total obligations." }
+]);
+
+add("finance", "Call flow", "2. Property finances", "Find out whether there is a mortgage, equity, or any complication.", [
+  { k: "chk", id: "fin", i: [
+    "Is there a mortgage? Approximately how much is owed?",
+    "What is the monthly payment? Do taxes and insurance come with it?",
+    "Any outstanding liens or judgments?",
+    "Are property taxes current?",
+    "Any HOA balances?",
+    "Any other loans secured by the property?"
+  ]}
+]);
+
+add("picker", "Call flow", "3. Strategy picker", "Pick the seller’s situation. The seller’s situation tells you what to investigate. The numbers decide whether ALD pursues it.", [
+  { k: "picker" },
+  { k: "note", x: "A creative finance deal is not automatically a good deal just because the seller accepts flexible terms." }
+]);
+
+add("sub2", "Strategies", "Subject-To", "The buyer takes ownership while the seller’s mortgage stays in the seller’s name. The loan is not paid off or transferred.", [
+  { k: "script", t: "How to explain it", p: [
+    "There’s another option we may be able to explore called Subject-To.",
+    "Instead of paying off your existing mortgage at closing, we would purchase the property subject to the existing loan.",
+    "That means the mortgage would remain in your name, but we would take ownership of the property and agree to make the payments.",
+    "This could allow you to move on without continuing to manage the property yourself.",
+    "There are some important things to understand, including your continued responsibility to the lender, so everything would need to be reviewed and documented properly before moving forward."
+  ]},
+  { k: "h", x: "Mortgage questions (answer all before presenting)" },
+  { k: "chk", id: "s2m", i: [
+    "Current mortgage balance?",
+    "Interest rate?",
+    "Total monthly payment, including taxes and insurance?",
+    "Years remaining?",
+    "Fixed or adjustable?",
+    "Current on payments? If behind, how many are past due?",
+    "What amount brings the mortgage current?",
+    "Any second mortgages or HELOCs?",
+    "Any other liens?"
+  ]},
+  { k: "h", x: "Seller requirements" },
+  { k: "chk", id: "s2s", i: [
+    "How much money would you need upfront?",
+    "Would you take less upfront if we handled the property’s ongoing responsibilities?",
+    "Are you mainly looking to walk away from managing it?",
+    "Do you need help with relocation expenses?",
+    "Would you let an independent closing attorney review the mortgage and title?"
+  ]},
+  { k: "h", x: "Qualification checklist" },
+  { k: "chk", id: "s2q", i: [
+    "Mortgage balance verified",
+    "Interest rate verified",
+    "Monthly payment verified",
+    "Payment history reviewed",
+    "Arrears confirmed, if any",
+    "Second mortgages identified",
+    "Liens and taxes reviewed",
+    "Seller’s upfront cash requirement established",
+    "Insurance requirements reviewed",
+    "Attorney and title company consulted"
+  ]}
+]);
+
+add("owner", "Strategies", "Owner financing", "The seller acts as the lender under a properly documented agreement.", [
+  { k: "script", t: "How to explain it", p: [
+    "There’s another option I’d like to explore with you called Owner Financing.",
+    "Instead of us paying you the entire purchase price upfront, you would finance an agreed portion of it.",
+    "We would agree on a purchase price, down payment, interest rate, and monthly payments.",
+    "You would receive your down payment at closing, followed by monthly payments over the agreed period.",
+    "That could give you a steady income stream, and depending on the structure, you could earn interest on the amount financed."
+  ]},
+  { k: "script", t: "Follow-up question", p: [
+    "Have you ever considered receiving monthly payments from the property instead of selling it for one lump sum?"
+  ]},
+  { k: "h", x: "Terms to negotiate" },
+  { k: "p", x: "Purchase price, down payment, interest rate, monthly payment, term, amortization, balloon payment, default and security provisions." },
+  { k: "h", x: "Ownership and equity questions" },
+  { k: "chk", id: "oe", i: [
+    "Do you own the property free and clear? If not, how much do you owe?",
+    "What is the approximate market value?",
+    "Any liens or other obligations?",
+    "Would an existing mortgage affect the financing?"
+  ]},
+  { k: "h", x: "Financing preference questions" },
+  { k: "chk", id: "op", i: [
+    "How much would you need upfront?",
+    "Would you be comfortable receiving monthly payments? What amount works?",
+    "What interest rate would you consider reasonable?",
+    "Interest-only, or principal and interest?",
+    "How long would you be willing to finance?",
+    "Would you consider a balloon after 3, 5, or 10 years?",
+    "Do you want immediate cash or long-term income?",
+    "Would you have an attorney prepare and review the documents?"
+  ]},
+  { k: "calc" }
+]);
+
+add("hybrid", "Strategies", "Hybrid", "For sellers who want money now and are willing to take the rest over time.", [
+  { k: "p", x: "A hybrid can combine an upfront payment, seller financing, an existing mortgage payoff or other approved debt arrangement, and a negotiated deferred payment." },
+  { k: "card", x: "<b>Example:</b> A seller wants $40,000 upfront but will take the rest of the agreed price in monthly payments. Investigate whether that combination satisfies the seller and still leaves room for the deal to make financial sense." },
+  { k: "note", risk: 1, x: "The structure must account for existing liens, mortgage obligations, title requirements, and applicable financing laws." }
+]);
+
+add("close", "Call flow", "4. Negotiate and close", "Find the seller’s ideal terms before you present yours.", [
+  { k: "note", x: "Do not negotiate against yourself. Learn the seller’s desired terms first. Your goal is to find the gap between what the seller needs and what the deal can support." },
+  { k: "chk", id: "neg", i: [
+    "What amount would you need upfront?",
+    "What monthly payment would make you comfortable?",
+    "What is your ideal closing date?",
+    "What would make you feel confident moving forward?",
+    "What concerns would you need addressed before signing?",
+    "If we could put together a structure that meets your needs, would you review it?"
+  ]},
+  { k: "script", t: "Closing the conversation", p: [
+    "Based on everything we’ve discussed, I think there may be a way to put something together that works for both of us.",
+    "What I’d like to do is review the mortgage information, verify the property’s financial situation, and put together a written proposal.",
+    "You’ll have the chance to review everything with your own attorney before making a decision.",
+    "If the numbers make sense and you’re comfortable with the structure, would you be open to moving forward?"
+  ]}
+]);
+
+add("obj", "Tools", "Objection handler", "Pick what the seller said. Never argue, never minimize the risks, never promise the mortgage liability disappears.", [
+  { k: "obj" }
+]);
+
+add("legal", "Protect", "Legal and due diligence", "Creative financing is not simply taking over someone’s payments. Every deal gets a legal, financial, title, and insurance review.", [
+  { k: "h", x: "Subject-To" },
+  { k: "chk", id: "l1", i: [
+    "Understood: the lender generally does not release the original borrower",
+    "Understood: a due-on-sale clause may let the lender demand full repayment after a transfer",
+    "Mortgage, arrears, liens, taxes, and insurance verified",
+    "Reliable third-party payment servicing set up",
+    "Insurance confirmed for the ownership and occupancy arrangement",
+    "Who pays taxes, insurance, and maintenance is documented",
+    "Seller protections and default procedures established",
+    "Transfer restrictions and lender requirements reviewed"
+  ]},
+  { k: "h", x: "Owner financing" },
+  { k: "chk", id: "l2", i: [
+    "Ownership and existing liens verified",
+    "Checked whether existing mortgage debt restricts the financing",
+    "Promissory note and security instrument properly documented",
+    "Interest, amortization, balloon, default terms, and servicing set",
+    "Federal and state seller-financing laws reviewed, including consumer mortgage rules"
+  ]},
+  { k: "note", risk: 1, x: "Closing standard: use an experienced real estate attorney and a title company. Never promise the seller their credit, mortgage liability, or lender obligations will disappear. Do not close until structure, documents, insurance, and title are reviewed." }
+]);
+
+add("train", "Tools", "Training scenarios", "Work each scenario through the seven required steps.", [
+  { k: "card", x: "<b>Scenario A: low-interest mortgage.</b> Balance $145,000, 3.25%, payment $1,200/mo. Seller is relocating and wants out. Decide whether Subject-To is worth investigating. Pin down upfront cash needed, mortgage obligations, expenses, and exit strategy." },
+  { k: "card", x: "<b>Scenario B: free and clear.</b> Value about $250,000, no mortgage. Seller wants $30,000 upfront plus monthly income. Decide whether owner financing or a hybrid meets the seller’s goals and gives ALD a viable deal." },
+  { k: "card", x: "<b>Scenario C: delinquency.</b> Balance $180,000, four payments behind, seller needs $10,000 to relocate. Find the real reinstatement amount, other liens, whether Subject-To is feasible, and whether the cash requirement is supportable." },
+  { k: "h", x: "For each scenario, complete" },
+  { k: "chk", id: "tr", i: [
+    "Identify the seller’s motivation",
+    "Ask the right discovery questions",
+    "Identify the potential financing strategy",
+    "Explain the structure in plain English",
+    "Identify the financial and legal risks",
+    "Handle at least two seller objections",
+    "Decide: move forward, restructure, or decline"
+  ]}
+]);
+
+add("submit", "Protect", "Approval package", "Everything required before you submit a creative finance deal.", [
+  { k: "h", x: "Seller" }, { k: "chk", id: "a1", i: ["Motivation", "Desired closing timeline", "Upfront cash requirement", "Preferred outcome"] },
+  { k: "h", x: "Property" }, { k: "chk", id: "a2", i: ["Address", "Estimated market value", "Condition", "Occupancy status", "Estimated repairs", "Rental potential, where applicable"] },
+  { k: "h", x: "Financials" }, { k: "chk", id: "a3", i: ["Mortgage balance", "Interest rate", "Monthly payment", "Arrears", "Other liens", "Taxes and insurance", "Proposed financing terms"] },
+  { k: "h", x: "Transaction" }, { k: "chk", id: "a4", i: ["Recommended strategy", "Proposed purchase price", "Upfront payment", "Monthly payment, if applicable", "Balloon terms, if applicable", "Exit strategy", "Outstanding due diligence", "Estimated ALD profit potential"] },
+  { k: "note", x: "We do not sell financing strategies. We solve seller problems through properly structured real estate transactions. Discover first. Structure second. Protect both parties. Close only when the numbers work." }
+]);
+
+var PICK = [
+  ["Low-interest existing mortgage", "Subject-To", "Verify balance, rate, payment, and payment history. Confirm the seller’s upfront cash need and review the due-on-sale risk with an attorney.", "sub2"],
+  ["Behind on mortgage payments", "Subject-To, after arrears analysis", "Get the exact reinstatement amount and any other liens first. Then test whether the seller’s cash need is supportable.", "sub2"],
+  ["High equity, wants monthly income", "Owner financing", "Confirm ownership and liens. Explore down payment, rate, term, and balloon preferences.", "owner"],
+  ["Owns property free and clear", "Owner financing", "Ask about upfront needs and monthly income goals. Consider a hybrid if they want cash now.", "owner"],
+  ["Wants some cash now, rest later", "Hybrid financing", "Establish the minimum upfront amount and a monthly payment they’d accept. Check the deal still has room.", "hybrid"],
+  ["Wants all cash immediately", "Traditional cash offer", "Be honest that creative financing is an alternative, not a requirement. Make a cash offer only if the numbers work.", "close"],
+  ["Multiple liens or complicated title", "Attorney and title review first", "Do not structure anything until counsel and the title company have reviewed the liens.", "legal"]
+];
+
+var OBJ = [
+  ["I don’t want my mortgage in my name.", "I understand. That’s an important concern. With Subject-To, the existing loan generally remains in your name. We can explain the risks and alternatives so you can decide whether it’s right for you."],
+  ["What happens if you stop paying?", "That’s a legitimate concern. We would establish payment obligations, servicing, insurance, and default protections in the agreement. However, the lender can still hold you responsible for the loan."],
+  ["I want all my money upfront.", "I understand. A traditional cash offer may be better if immediate full payment is your priority. Creative financing is an alternative, not something you have to accept."],
+  ["I don’t understand how this works.", "That’s perfectly fine. Let me walk you through the transaction one step at a time. You can also have an independent attorney review everything."],
+  ["What if I want to buy another house?", "Your existing mortgage may still appear on your credit report and affect your ability to qualify for another loan. We should discuss that before moving forward."],
+  ["Why would you want to do this?", "It gives us another way to acquire a property when a traditional cash purchase doesn’t meet the seller’s needs. It can also create an opportunity for both sides."],
+  ["I don’t want to finance someone.", "I understand. We can explore a traditional purchase or another structure that better fits your goals."]
+];
+
+var state = {}, cur = "start";
+
+try {
+  var sv = localStorage.getItem("aldpb");
+  if (sv) state = JSON.parse(sv) || {};
+} catch(e){}
+
+function save() {
+  try { localStorage.setItem("aldpb", JSON.stringify(state)); } catch(e){}
+}
+
+function esc(s) {
+  return String(s).replace(/[&<>"']/g, function(c) {
+    return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+  });
+}
+
+function prog(s) {
+  var t = 0, d = 0;
+  s.b.forEach(function(b) {
+    if (b.k === "chk") {
+      b.i.forEach(function(_, n) {
+        t++;
+        if (state[b.id + n]) d++;
+      });
+    }
+  });
+  return t ? Math.round(d / t * 100) : null;
+}
+
+function renderNav() {
+  var h = '<div class="brand-header"><h1><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>ALD Playbook</h1><p>Creative finance, call by call</p></div>';
+  var g = "";
+  
+  S.forEach(function(s) {
+    if (s.g !== g) {
+      g = s.g;
+      h += '<div class="grp">' + esc(g) + '</div>';
+    }
+    var p = prog(s);
+    h += '<button data-id="' + s.id + '"' + (s.id === cur ? ' aria-current="true"' : '') + '><span>' + esc(s.t) + '</span>' + (p === null ? '' : '<span class="pct">' + p + '%</span>') + '</button>';
+  });
+  
+  var n = document.getElementById("nav");
+  n.innerHTML = h;
+  n.querySelectorAll("button").forEach(function(b) {
+    b.onclick = function() {
+      go(b.dataset.id);
+      n.classList.remove("open");
+    };
+  });
+}
+
+function blk(b) {
+  switch(b.k) {
+    case "h": return '<h3>' + esc(b.x) + '</h3>';
+    case "p": return '<p>' + esc(b.x) + '</p>';
+    case "note": return '<div class="note' + (b.risk ? ' risk' : '') + '">' + esc(b.x) + '</div>';
+    case "card": return '<div class="card">' + b.x + '</div>';
+    case "script":
+      return '<div class="script"><div class="t">' + esc(b.t) + '</div>' + 
+        b.p.map(function(x) { return '<p>“' + esc(x) + '”</p>'; }).join("") + 
+        '<button class="copy" data-copy="' + esc(b.p.join(" ")) + '">Copy Script</button></div>';
+    case "table":
+      return '<div class="table-wrapper"><table><thead><tr>' + 
+        b.h.map(function(x) { return '<th>' + esc(x) + '</th>'; }).join("") + 
+        '</tr></thead><tbody>' + 
+        b.r.map(function(r) {
+          return '<tr>' + r.map(function(x) { return '<td>' + esc(x) + '</td>'; }).join("") + '</tr>';
+        }).join("") + '</tbody></table></div>';
+    case "chk":
+      return '<ul class="chk card">' + b.i.map(function(x, n) {
+        var k = b.id + n;
+        return '<li><label><input type="checkbox" data-k="' + k + '"' + (state[k] ? ' checked' : '') + '><span>' + esc(x) + '</span></label></li>';
+      }).join("") + '</ul>';
+    case "picker":
+      return '<div class="opts" id="pk">' + PICK.map(function(p, n) {
+        return '<button data-n="' + n + '" aria-pressed="false">' + esc(p[0]) + '</button>';
+      }).join("") + '</div><div class="card out" id="pkout">Select a seller situation above to map out the strategy.</div>';
+    case "obj":
+      return '<div class="opts" id="ob">' + OBJ.map(function(p, n) {
+        return '<button data-n="' + n + '" aria-pressed="false">' + esc(p[0]) + '</button>';
+      }).join("") + '</div><div class="script out" id="obout"><div class="t">Suggested Response</div><p>Pick a seller objection above to view the script response.</p></div>';
+    case "calc":
+      return '<h3>Payment Calculator</h3><div class="card"><p style="margin-top:0;color:var(--mute);font-size:14px">Compute real monthly payments based on interest rate and amortization. Balloons impact loan term maturity, not ongoing payment calculations.</p><div class="grid"><label class="f">Purchase Price<input id="c1" type="number" value="200000"></label><label class="f">Down Payment<input id="c2" type="number" value="20000"></label><label class="f">Interest Rate (%)<input id="c3" type="number" step="0.01" value="6"></label><label class="f">Amortization (Years)<input id="c4" type="number" value="30"></label><label class="f">Balloon Due (Years)<input id="c5" type="number" value="5"></label></div><div class="res" id="cres"></div></div>';
+  }
+  return "";
+}
+
+function scene(i) {
+  var t = i % 3, o = "";
+  if (t === 0) {
+    o = "<defs><linearGradient id='sk1' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#0f2338'/><stop offset='1' stop-color='#1e3a5f'/></linearGradient></defs><rect width='800' height='300' fill='url(#sk1)'/><circle cx='680' cy='100' r='60' fill='#fcd34d' opacity='.15'/>";
+    [[40,80,180],[140,60,220],[220,100,140],[340,70,250],[430,90,190],[540,65,210],[620,85,160]].forEach(function(b){
+      o += "<rect x='"+b[0]+"' y='"+(300-b[2])+"' width='"+b[1]+"' height='"+b[2]+"' fill='#091320' opacity='.7'/>";
+    });
+  } else if (t === 1) {
+    o = "<defs><linearGradient id='sk2' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#1e3a5f'/><stop offset='1' stop-color='#0f2338'/></linearGradient></defs><rect width='800' height='300' fill='url(#sk2)'/><path d='M0 250 Q200 220 400 250 T800 230 V300 H0 Z' fill='#091320'/>";
+  } else {
+    o = "<defs><linearGradient id='sk3' x1='0' y1='0' x2='0' y2='1'><stop offset='0' stop-color='#182e4a'/><stop offset='1' stop-color='#0b1828'/></linearGradient></defs><rect width='800' height='300' fill='url(#sk3)'/>";
+  }
+  return "<svg viewBox='0 0 800 300' preserveAspectRatio='xMidYMax slice' aria-hidden='true'>" + o + "</svg>";
+}
+
+function render() {
+  var s = S.find(function(x) { return x.id === cur; }), i = S.indexOf(s);
+  var h = '<div class="hero">' + scene(i) + '<div class="shade"></div><div class="txt"><h2>' + esc(s.t) + '</h2><p class="lead">' + esc(s.lead) + '</p></div></div>' + s.b.map(blk).join("");
+  
+  h += '<div class="pn">' + 
+    (i > 0 ? '<button data-go="' + S[i-1].id + '">← ' + esc(S[i-1].t) + '</button>' : '<span></span>') + 
+    (i < S.length - 1 ? '<button data-go="' + S[i+1].id + '">' + esc(S[i+1].t) + ' →</button>' : '<button id="rst">Reset Checklists</button>') + 
+    '</div>';
+    
+  var m = document.getElementById("main");
+  m.innerHTML = h;
+  
+  m.querySelectorAll("[data-go]").forEach(function(b) { b.onclick = function() { go(b.dataset.go); }; });
+  
+  m.querySelectorAll("input[data-k]").forEach(function(c) {
+    c.onchange = function() {
+      state[c.dataset.k] = c.checked;
+      save();
+      renderNav();
+    };
+  });
+  
+  m.querySelectorAll(".copy").forEach(function(b) {
+    b.onclick = function() {
+      var text = b.dataset.copy;
+      navigator.clipboard.writeText(text).then(function() {
+        var orig = b.textContent;
+        b.textContent = "Copied!";
+        setTimeout(function() { b.textContent = orig; }, 1500);
+      });
+    };
+  });
+  
+  var pk = document.getElementById("pk");
+  if (pk) {
+    pk.querySelectorAll("button").forEach(function(b) {
+      b.onclick = function() {
+        pk.querySelectorAll("button").forEach(function(x) { x.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+        var p = PICK[b.dataset.n];
+        var t = S.find(function(x) { return x.id === p[3]; }).t;
+        document.getElementById("pkout").innerHTML = '<span class="tag">' + esc(p[1]) + '</span><p style="margin:6px 0 14px">' + esc(p[2]) + '</p><button class="btn" data-go2="' + p[3] + '">Explore ' + esc(t) + '</button>';
+        document.querySelector("[data-go2]").onclick = function() { go(p[3]); };
+      };
+    });
+  }
+  
+  var ob = document.getElementById("ob");
+  if (ob) {
+    ob.querySelectorAll("button").forEach(function(b) {
+      b.onclick = function() {
+        ob.querySelectorAll("button").forEach(function(x) { x.setAttribute("aria-pressed", "false"); });
+        b.setAttribute("aria-pressed", "true");
+        var p = OBJ[b.dataset.n];
+        document.getElementById("obout").innerHTML = '<div class="t">Suggested Response</div><p>“' + esc(p[1]) + '”</p><button class="copy" data-copy="' + esc(p[1]) + '">Copy Script</button>';
+        var c = document.querySelector("#obout .copy");
+        c.onclick = function() {
+          navigator.clipboard.writeText(p[1]).then(function() {
+            c.textContent = "Copied!";
+            setTimeout(function() { c.textContent = "Copy Script"; }, 1500);
+          });
+        };
+      };
+    });
+  }
+  
+  var rs = document.getElementById("rst");
+  if (rs) {
+    rs.onclick = function() {
+      state = {};
+      save();
+      renderNav();
+      render();
+    };
+  }
+  
+  if (document.getElementById("c1")) {
+    ["c1", "c2", "c3", "c4", "c5"].forEach(function(id) {
+      document.getElementById(id).oninput = calc;
+    });
+    calc();
+  }
+}
+
+function money(n) {
+  return "$" + Math.round(n).toLocaleString("en-US");
+}
+
+function calc() {
+  var v = function(id) { return parseFloat(document.getElementById(id).value) || 0; };
+  var L = v("c1") - v("c2");
+  var r = (v("c3") / 100) / 12;
+  var n = v("c4") * 12;
+  var k = Math.min(v("c5") * 12, n);
+  var p = 0;
+  
+  if (L <= 0 || n <= 0) {
+    document.getElementById("cres").innerHTML = "<div><span>Enter a purchase price greater than the down payment.</span></div>";
+    return;
+  }
+  
+  if (r === 0) {
+    p = L / n;
+  } else {
+    p = L * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+  }
+  
+  var bal = 0;
+  if (r === 0) {
+    bal = L - (p * k);
+  } else {
+    bal = L * Math.pow(1 + r, k) - p * ((Math.pow(1 + r, k) - 1) / r);
+  }
+  
+  document.getElementById("cres").innerHTML = 
+    '<div><b>' + money(L) + '</b><span>Seller-Financed Balance</span></div>' +
+    '<div><b>' + money(p) + '</b><span>Monthly Payment (P&I)</span></div>' +
+    '<div><b>' + money(Math.max(bal, 0)) + '</b><span>Balloon Due at Year ' + v("c5") + '</span></div>' +
+    '<div><b>' + money(p * k) + '</b><span>Total Payments Paid Before Balloon</span></div>';
+}
+
+function go(id) {
+  cur = id;
+  renderNav();
+  render();
+  window.scrollTo(0, 0);
+  if (location.hash !== "#" + id) history.replaceState(null, "", "#" + id);
+}
+
+window.addEventListener("hashchange", function() {
+  var h = location.hash.slice(1);
+  if (S.some(function(s) { return s.id === h; })) go(h);
+});
+
+document.getElementById("menuToggle").onclick = function() {
+  document.getElementById("nav").classList.toggle("open");
+};
+
+var h0 = location.hash.slice(1);
+if (S.some(function(s) { return s.id === h0; })) cur = h0;
+
+renderNav();
+render();
+</script>
+</body>
+</html>
